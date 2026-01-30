@@ -18,8 +18,6 @@
         <input type="text" name="nama">
         <label>Kelas</label>
         <input type="text" name="kelas">
-        <label>No Hp</label>
-        <input type="text" name="nohp">
         <label>Alamat</label>
         <input type="text" name="alamat">
 

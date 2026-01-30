@@ -3,18 +3,24 @@
 include 'config.php';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $nama = $_POST['nama'];
-    $kelas = $_POST['kelas'];
+
+    $nama   = $_POST['nama'];
+    $kelas  = $_POST['kelas'];
     $alamat = $_POST['alamat'];
 
-    // insert data ke database
-    $sql = "INSERT INTO tbsiswa (nama, kelas, alamat) VALUES ('$nama', '$kelas', '$alamat')";
+    // query insert data
+    $sql = "INSERT INTO tbsiswa (nama, kelas, alamat)
+            VALUES ('$nama', '$kelas', '$alamat')";
+
     $result = mysqli_query($koneksi, $sql);
 
-    // Tutup koneksi
+    // cek apakah query berhasil
+    if (!$result) {
+        die("Gagal menyimpan data: " . mysqli_error($koneksi));
+    }
+
     mysqli_close($koneksi);
 
-    // Redirect ke halaman index.php
     header("Location: view-data.php");
     exit();
 }

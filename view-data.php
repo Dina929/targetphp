@@ -4,66 +4,69 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Data Siswa</title>
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-    <?php
-    include 'config.php';
-    ?>
 
-    <!-- tampilkan data dari database -->
+<?php
+include 'config.php';
 
-    <?php
-    // query untuk mendapatkan data dari database
-    $sql = "SELECT * FROM tbsiswa";
-    $result = mysqli_query($koneksi, $sql);
-    ?>
+/* Query untuk mengambil data dari database */
+$sql    = "SELECT * FROM tbsiswa";
+$result = mysqli_query($koneksi, $sql);
+?>
+
+<!-- Tombol kembali -->
+<div class="container">
+    <a href="index.php"><button>Kembali</button></a>
+</div>
+
+<!-- Total data siswa -->
+<p style="text-align:center;">
+    Total Data Siswa: <b><?= mysqli_num_rows($result); ?></b>
+</p>
+
+<?php if (mysqli_num_rows($result) > 0): ?>
+
     <div class="container">
-        <!-- tombol kembali ke halaman input data -->
-        <a href="index.php"><button> Kembali</button></a>
+        <table>
+            <thead>
+                <tr>
+                    <th>Nama</th>
+                    <th>Kelas</th>
+                    <th>Alamat</th>
+                    <th>Aksi</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <?php $no = 1; ?>
+                <?php while ($row = mysqli_fetch_assoc($result)): ?>
+                    <tr>
+                        <td><?= $no++; ?></td>
+                        <td><?= htmlspecialchars($row['nama']); ?></td>
+                        <td><?= htmlspecialchars($row['kelas']); ?></td>
+                        <td><?= htmlspecialchars($row['alamat']); ?></td>
+
+                        <td>
+                            <a href="hapus.php?id=<?= urlencode($row['id']); ?>">Hapus</a>
+                            |
+                            <a href="update.php?id=<?= urlencode($row['id']); ?>">Edit</a>
+                        </td>
+                    </tr>
+                <?php endwhile; ?>
+            </tbody>
+
+        </table>
     </div>
-    <?php
-    if (mysqli_num_rows($result) > 0): ?>
-        <div class="container">
-            <div>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Nama</th>
-                            <th>Kelas</th>
-                            <th>Alamat</th>
-                            <th>Aksi</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php while ($row = mysqli_fetch_assoc($result)): ?>
-                            <tr>
-                                <td><?= htmlspecialchars($row['nama']); ?></td>
-                                <td><?= htmlspecialchars($row['kelas']); ?></td>
-                                <td><?= htmlspecialchars($row['alamat']); ?></td>
-                                <!-- tombol hapus data tanpa konfirmasi -->
-                                <td>
-                                    <a href="hapus.php?id=<?= urlencode($row['id']); ?>">Hapus</a>
-                                    <a href="update.php?id=<?= urlencode($row['id']); ?>">Edit</a>
 
+<?php else: ?>
 
-                                </td>
-                            </tr>
-                        <?php endwhile; ?>
-                    </tbody>
-                </table>
-            </div>
+    <p style="text-align:center;">Data tidak ditemukan</p>
 
-
-
-        <?php else: ?>
-
-            <p>Data tidak ditemukan</p>
-
-        <?php endif; ?>
+<?php endif; ?>
 
 </body>
-
 </html>
