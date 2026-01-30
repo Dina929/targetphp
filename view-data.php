@@ -5,7 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Data Siswa</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="css/style.css">
+   
 </head>
 
 <body>
@@ -34,6 +35,7 @@ $result = mysqli_query($koneksi, $sql);
         <table>
             <thead>
                 <tr>
+                    <th>No</th>
                     <th>Nama</th>
                     <th>Kelas</th>
                     <th>Alamat</th>

@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>XI RPL 2</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
@@ -14,6 +15,7 @@
     ?>
     <!-- form inputan -->
     <form action="prosesinput.php" method="post">
+       
         <label>Nama</label>
         <input type="text" name="nama">
         <label>Kelas</label>
